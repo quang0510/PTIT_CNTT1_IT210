@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chi tiết món ăn</title>
+    <style>
+        .success { color: green; font-weight: bold; }
+        .info-box { border: 1px solid #ccc; padding: 15px; width: 400px; }
+    </style>
+</head>
+
+<body>
+<h2>Kết quả xử lý</h2>
+
+<p th:if="${message}" th:text="${message}" class="success"></p>
+
+<div class="info-box" th:if="${food}">
+    <h3>Thông tin món ăn vừa thêm:</h3>
+    <ul>
+        <li>Tên món: <b th:text="${food.name}"></b></li>
+        <li>Danh mục: <span th:text="${food.category}"></span></li>
+        <li>Giá tiền: <span th:text="${#numbers.formatDecimal(food.price, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></span></li>
+        <li>Tên file hệ thống: <code th:text="${food.imageUrl}"></code></li>
+        <li>Đường dẫn vật lý: <br/>
+            <small th:text="${food.physicalPath}"></small>
+        </li>
+    </ul>
+    <a th:href="@{/merchant/food/add}">Tiếp tục thêm món khác</a>
+</div>
+
+<div th:unless="${food}">
+    <p>Không có dữ liệu món ăn để hiển thị.</p>
+</div>
+</body>
+</html>
